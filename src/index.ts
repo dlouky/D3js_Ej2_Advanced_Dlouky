@@ -5,6 +5,22 @@ const d3Composite = require("d3-composite-projections");
 import { latLongCommunities } from "./communities";
 import { initial, final, ResultEntry } from "./stats";
 
+// set the affected color scale
+var color = d3
+.scaleLinear<number, number>()
+.domain([0, 9500])
+.range([10, 90]);
+
+ const assignCommunityBackgroundColor = (countryName: string, data: ResultEntry[]) => {
+  const item = data.find(
+    item => item.name === countryName
+  );
+  if (item) {
+    console.log(item.value);
+  }
+  return item ? 100-color(item.value) : 100;
+ };
+
 
 const calculateRadiusBasedOnAffectedCases = (comunidad: string, data: ResultEntry[]) => {
   const entry = data.find(item => item.name === comunidad);
@@ -16,7 +32,7 @@ const calculateRadiusBasedOnAffectedCases = (comunidad: string, data: ResultEntr
   const affectedRadiusScale = d3
   .scaleLinear()
   .domain([0, maxAffected])
-  .range([0, 50]); // 50 pixel max radius, we could calculate it relative to width and height
+  .range([0, 30.5]); // 30.5 pixel max radius, we could calculate it relative to width and height
   
   return entry ? affectedRadiusScale(entry.value) : 0;
 };
@@ -39,6 +55,7 @@ const aProjection = d3Composite
 const geoPath = d3.geoPath().projection(aProjection);
 const geojson = topojson.feature(spainjson, spainjson.objects.ESP_adm1);
 
+
 svg
   .selectAll("path")
   .data(geojson["features"])
@@ -46,7 +63,12 @@ svg
   .append("path")
   .attr("class", "country")
   // data loaded from json file
-  .attr("d", geoPath as any);
+  .attr("d", geoPath as any)
+  .style("fill", function(d: any) {
+    console.log(d.properties.NAME_1)
+    let brigthness = assignCommunityBackgroundColor(d.properties.NAME_1, initial);
+    return `hsla(14, 100%, ${brigthness}%, 1)`;
+  });
 
 svg
   .selectAll("circle")
@@ -69,19 +91,41 @@ svg
 const updateCircles = (data: ResultEntry[]) => {
   svg.selectAll("circle")
   .data(latLongCommunities)
+  /*.merge(svg as any)*/
+  .transition()
+  .duration(500)
   .attr("r", d => calculateRadiusBasedOnAffectedCases(d.name, data))
   .attr("cx", d => aProjection([d.long, d.lat])[0])
   .attr("cy", d => aProjection([d.long, d.lat])[1]);
 };
 
+const updateMaps = (data: ResultEntry[]) => {
+  svg
+  .selectAll("path")
+  .data(geojson["features"])
+  /*.merge(svg as any)*/
+  .transition()
+  .duration(500)
+  // data loaded from json file
+  .attr("d", geoPath as any)
+  .style("fill", function(d: any) {
+    console.log(d.properties.NAME_1)
+    let brigthness = assignCommunityBackgroundColor(d.properties.NAME_1, data);
+    return `hsla(14, 100%, ${brigthness}%, 1)`;
+  });
+};
+
+
 document
 .getElementById("initial")
 .addEventListener("click", function handleResultsInitial() {
-  updateCircles(initial);
+  updateCircles(initial)
+  updateMaps(initial);
 });
 
 document
 .getElementById("final")
 .addEventListener("click", function handleResultsFinal() {
-  updateCircles(final);
+  updateCircles(final)
+  updateMaps(final);
 });

@@ -5,7 +5,7 @@ export interface ResultEntry {
 
 export const initial : ResultEntry[] = [
   {
-    name: "Madrid",
+    name: "Comunidad de Madrid",
     value: 587
   },
   {
@@ -21,11 +21,11 @@ export const initial : ResultEntry[] = [
     value: 101
   },
   {
-    name: "Valencia",
+    name: "Comunidad Valenciana",
     value: 50
   },
   {
-    name: "Murcia",
+    name: "Región de Murcia",
     value: 5
   },
   {
@@ -33,7 +33,7 @@ export const initial : ResultEntry[] = [
     value: 7
   },
   {
-    name: "Castilla La Mancha",
+    name: "Castilla-La Mancha",
     value: 26
   },
   {
@@ -45,7 +45,7 @@ export const initial : ResultEntry[] = [
     value: 12
   },
   {
-    name: "Asturias",
+    name: "Principado de Asturias",
     value: 10
   },
   {
@@ -69,14 +69,14 @@ export const initial : ResultEntry[] = [
     value: 11
   },
   {
-    name: "Navarra",
+    name: "Comunidad Foral de Navarra",
     value: 13
   }
 ];
 
 export const final : ResultEntry[] = [
   {
-    name: "Madrid",
+    name: "Comunidad de Madrid",
     value: 9702
   },
   {
@@ -92,11 +92,11 @@ export const final : ResultEntry[] = [
     value: 4704
   },
   {
-    name: "Valencia",
+    name: "Comunidad Valenciana",
     value: 1604
   },
   {
-    name: "Murcia",
+    name: "Región de Murcia",
     value: 296
   },
   {
@@ -104,7 +104,7 @@ export const final : ResultEntry[] = [
     value: 384
   },
   {
-    name: "Castilla La Mancha",
+    name: "Castilla-La Mancha",
     value: 1819
   },
   {
@@ -116,7 +116,7 @@ export const final : ResultEntry[] = [
     value: 282
   },
   {
-    name: "Asturias",
+    name: "Principado de Asturias",
     value: 545
   },
   {
@@ -140,7 +140,7 @@ export const final : ResultEntry[] = [
     value: 331
   },
   {
-    name: "Navarra",
+    name: "Comunidad Foral de Navarra",
     value: 794
   }
 ];
