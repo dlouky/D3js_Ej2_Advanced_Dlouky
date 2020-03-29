@@ -9,7 +9,7 @@ I focus on Spain affection by community displaying a map pinning affected locati
 
 # Steps
 
-- I will take as starting example _02-pin-location-scale_ from https://github.com/dlouky/D3js_Ej1_Mandatory_Dlouky.git. Let's clone the project and execute _npm install_.
+- I will take as starting example _D3js_Ej1_Mandatory_Dlouky_ from https://github.com/dlouky/D3js_Ej1_Mandatory_Dlouky.git. Let's clone the project and execute _npm install_.
 
 ```bash
 npm install
